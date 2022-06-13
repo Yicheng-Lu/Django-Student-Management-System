@@ -31,7 +31,7 @@ class Student(User):
     interested_in = models.ManyToManyField(Topic)
 
     def __str__(self):
-        return self.username
+        return "(%s, %s)" % (self.first_name, self.last_name)
 
 class Order(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
