@@ -35,12 +35,13 @@ def about(request):
 
 
 def detail(request, top_no):
-    try:
-        Topic.objects.get(id=top_no)
-        response = HttpResponse()
-        response.write('<p>' + Topic.objects.get(id=top_no).name + '</p>')
-    except Topic.DoesNotExist:
-        raise Http404("No Topic matches the id!")
+    # try:
+    #     Topic.objects.get(id=top_no)
+    # except Topic.DoesNotExist:
+    #     raise Http404("No Topic matches the id!")
+    obj = get_object_or_404(Topic, id=top_no)
+    response = HttpResponse()
+    response.write('<p>' + obj.name + '</p>')
     return response
 
 
