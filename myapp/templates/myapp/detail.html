@@ -1,0 +1,18 @@
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+    <h3>Topic: {{ top_detail.name }}</h3>
+    <h3>Category: {{ top_detail.category }}</h3>
+    <h3>Courses under this category:</h3>
+    <table>
+        {% for course in cou_list %}
+        <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href={% url "myapp:index" %}></a></p>
+{% endblock %}
+
+{% block myhdg %}Hello {{ user.getUserName }}{% endblock %}

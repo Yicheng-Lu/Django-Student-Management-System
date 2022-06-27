@@ -1,0 +1,13 @@
+h1{
+    background-color: darkgray;
+    color: black;
+    font-family: "Times New Roman", serif;
+    font-size: x-large;
+    font-style: italic;
+    text-align: center;
+}
+
+.hbar1 {
+    display: inline;
+    margin: 15px;
+}
