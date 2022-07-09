@@ -16,3 +16,7 @@ def detail(request, top_no):
     topic = get_object_or_404(Topic, id=top_no)
     cou_list = Course.objects.filter(topic=top_no)
     return render(request, r'myapp/detail.html', {'top_detail': topic, 'cou_list': cou_list})
+
+def courses(request):
+    courlist = Course.objects.all().order_by('id')
+    return render(request, 'myapp/courses.html', {'courlist': courlist})
