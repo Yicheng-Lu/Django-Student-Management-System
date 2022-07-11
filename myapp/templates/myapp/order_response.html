@@ -1,0 +1,9 @@
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+    <h3>{{ msg }}</h3>
+{#    <p><a href="index0.html"></a></p>#}
+{#    <p><a href={% url "myapp:index" %}></a></p>#}
+{% endblock %}
+
+{% block myhdg %}Hello {{ user.getUserName }}{% endblock %}

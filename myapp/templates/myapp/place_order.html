@@ -11,10 +11,13 @@
         </tr>
         {% endfor %}
     </table>
-    <ul>
-        <li class="hbar1"><a href = "{% url 'myapp:index' %}">Click here to return to main page</a><br/></li>
-        <li class="hbar1"><a href = "{% url 'myapp:place_order' %}">Click here to place an order</a><br></li>
-    </ul>
+    <h3>Place Order Here: </h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ order_form }}
+        <input type="submit" value="Submit">
+    </form>
+    <p><a href={% url "myapp:index" %}></a></p>
 {% endblock %}
 
 {% block myhdg %}Hello {{ user.getUserName }}{% endblock %}
