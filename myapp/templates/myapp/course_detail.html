@@ -1,0 +1,18 @@
+{% extends 'Myapp/base.html' %}
+
+{% block body_block %}
+    <p>{{ cur.name }}   ${{ cur.price }} , its interested No is {{ cur.interested }}</p>
+    {% if cur.for_everyone %}
+        <p>This course is for everyone</p>
+    {% else %}
+        <p>This course is not for everyone</p>
+    {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type = "submit" value="submnit" />
+        </form>
+{% endblock %}
+
+{% block myhdg %}{% endblock %}
+{% block title %}Course_detail{% endblock %}
