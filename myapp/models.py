@@ -48,6 +48,7 @@ class Order(models.Model):
     ORDER_CHOICES = [(0, 'Cancelled'), (1, 'Order Confirmed')]
     order_status = models.IntegerField(choices=ORDER_CHOICES, default=1)
     order_date = models.DateField()
+    order_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     @classmethod
     def total_cost(self):

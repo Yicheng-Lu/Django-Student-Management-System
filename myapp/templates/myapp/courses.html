@@ -6,7 +6,7 @@
         {% for course in courlist %}
         <tr>
             <td>{{ course.id }}</td>
-            <td>{{ course.name }}</td>
+            <td><a href = {% url "myapp:course_detail" course.id %}>{{ course.name }}</a></td>
             <td>{{ course.price }}</td>
         </tr>
         {% endfor %}

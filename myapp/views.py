@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 
-from .forms import OrderForm
+from .forms import OrderForm, InterestForm
 from .models import Topic, Course, Student, Order
 
 
@@ -33,6 +33,9 @@ def place_order(request):
         if form.is_valid():
             order = form.save(commit=False)
             if order.levels <= order.course.stages:
+                price = order.course.price
+                if price >= 150:
+                    order.order_price = order.course.discount()
                 order.save()
                 msg = 'Your course has been ordered successfully.'
             else:
@@ -44,5 +47,13 @@ def place_order(request):
 
 
 def course_detail(request, course_no):
-    course = Course.objects.get(course_no)
-    return render(request, 'myapp/course_detail.html', {'course': course})
+    course = get_object_or_404(Course, id=course_no)
+    if request.method == "POST":
+        form = InterestForm(request.POST)
+        if form.is_valid():
+            course.interested = course.interested+1
+            course.save()
+            return courses(request)
+    else:
+        form = InterestForm()
+    return render(request, 'Myapp/course_detail.html', {'form': form, 'cur': course})
