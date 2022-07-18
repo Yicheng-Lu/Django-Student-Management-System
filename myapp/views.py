@@ -56,4 +56,4 @@ def course_detail(request, course_no):
             return courses(request)
     else:
         form = InterestForm()
-    return render(request, 'Myapp/course_detail.html', {'form': form, 'cur': course})
+    return render(request, 'Myapp/course_detail.html', {'form': form, 'course': course})

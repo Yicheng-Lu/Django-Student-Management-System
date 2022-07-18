@@ -12,7 +12,7 @@
         {% endfor %}
     </table>
     <h3>Place Order Here: </h3>
-    <form method="post">
+    <form action="" method="post">
         {% csrf_token %}
         {{ order_form }}
         <input type="submit" value="Submit">

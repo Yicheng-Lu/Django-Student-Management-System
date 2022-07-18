@@ -1,8 +1,8 @@
 {% extends 'Myapp/base.html' %}
 
 {% block body_block %}
-    <p>{{ cur.name }}   ${{ cur.price }} , its interested No is {{ cur.interested }}</p>
-    {% if cur.for_everyone %}
+    <p>{{ course.name }}   ${{ course.price }} , its interested No is {{ course.interested }}</p>
+    {% if course.for_everyone %}
         <p>This course is for everyone</p>
     {% else %}
         <p>This course is not for everyone</p>
