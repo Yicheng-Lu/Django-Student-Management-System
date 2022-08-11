@@ -71,6 +71,7 @@ def course_detail(request, course_no):
     return render(request, 'myapp/course_detail.html', {'form': form, 'course': course})
 
 
+@login_required
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
