@@ -15,4 +15,4 @@
 {#    <p><a href="{% url 'myapp:about' %}">About page</a></p>#}
 {% endblock %}
 
-{% block myhdg %}Hello {{ user.getUserName }}{% endblock %}
+{% block myhdg %}Hello {{ user.get_username }} your login time is {{ last_login }}{% endblock %}

@@ -3,7 +3,7 @@
 {% block body_block %}
     <h3>Available Courses:</h3>
     <table>
-        {% for course in courlist %}
+        {% for course in cour_list %}
         <tr>
             <td>{{ course.id }}</td>
             <td><a href = {% url "myapp:course_detail" course.id %}>{{ course.name }}</a></td>

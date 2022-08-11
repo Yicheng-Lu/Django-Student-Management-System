@@ -1,0 +1,33 @@
+{% extends 'Myapp/base.html' %}
+<!--user.get_username可以从request中获取user name-->
+{% block body_block %}
+    {%  block content %}
+        <div>
+             {%  if course_list %}
+                <h2> Ordered Courses</h2>
+                <ol>
+                   {%  for crs in course_list %}
+                       <li>{{ crs }}</li>
+                   {% endfor %}
+                 </ol>
+            {%  else %}
+                <Strong> There is no Course </Strong>
+            {% endif %}
+        </div>
+
+        <div>
+            {%  if topic_list %}
+                <h2> Topics' of Order Courses </h2>
+                <ol>
+                   {%  for tp in topic_list %}
+                       <li>{{ tp.name }}</li>
+                   {% endfor %}
+                 </ol>
+            {%  else %}
+                <Strong> There is no interested topic </Strong>
+            {% endif %}
+        </div>
+
+    {%  endblock %}
+{% endblock %}
+{% block myhdg %}Hello {{ firstName }} {{ lastName }}{% endblock %}

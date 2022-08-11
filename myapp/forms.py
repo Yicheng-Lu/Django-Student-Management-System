@@ -20,3 +20,7 @@ class OrderForm(forms.ModelForm):
             'student': RadioSelect,
             'order_date': SelectDateWidget,
         }
+
+class LoginForm(forms.Form):
+    username = forms.CharField(required=True, label='username', max_length=100)
+    password = forms.CharField(required=True, label='password', max_length=20)
