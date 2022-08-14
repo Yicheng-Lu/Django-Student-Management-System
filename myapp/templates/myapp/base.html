@@ -22,6 +22,8 @@
             <p><a href="{% url 'myapp:login' %}">Log In</a></p>
             <p><a href="{% url 'myapp:register' %}">Register</a></p>
         {% endif %}
+    </div>
+    <div>
         {% block body_block %}*** {% endblock %}
     </div>
     <hr />
