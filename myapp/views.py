@@ -1,13 +1,13 @@
 import json
 
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.utils import timezone
 
-from .forms import OrderForm, InterestForm, LoginForm
+from .forms import OrderForm, InterestForm, LoginForm, RegisterForm
 from .models import Topic, Course, Student, Order
 
 
@@ -90,6 +90,17 @@ def user_login(request):
     else:
         return render(request, 'myapp/login.html', {'loginForm': LoginForm})
 
+def user_register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:login')
+    else:
+        form = RegisterForm
+    return render(request, 'myapp/register.html', {'form': form})
+
+
 
 @login_required
 def user_logout(request):
@@ -126,3 +137,4 @@ def testCookie(request):
             request.session.set_test_cookie()
             return HttpResponse("Please enable cookies")
     return render(request, 'myapp/index.html')
+
