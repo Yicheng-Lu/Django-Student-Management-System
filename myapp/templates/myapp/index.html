@@ -2,15 +2,28 @@
 
 {% block body_block %}
     {% if top_list %}
-        <h2>List of Topics</h2>
-        <ol>
-            {% for top in top_list %}
-                <li><a href={% url 'myapp:detail' top.id %}>{{ top.name }}</a></li>
-            {% endfor %}
-        </ol>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-3">
+                    <h2>List of Topics</h2>
+                </div>
+            </div>
+            <div class="container-lg">
+                <div class="row">
+                {% load static %}
+                    {% for top in top_list %}
+                        <div class="card mb-3" style="width: 30%;margin: 1.6%">
+                            <img src="{% static 'myapp/img/course.jpg' %}">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ top.name }}</h4>
+                                <a class="btn btn-primary" href="{% url 'myapp:detail' top.id %}">Check courses</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     {% else %}
         <strong>There are no available topics!</strong>
     {% endif %}
-{#    <p><a href="/myapp/about">About page</a></p>#}
-{#    <p><a href="{% url 'myapp:about' %}">About page</a></p>#}
 {% endblock %}

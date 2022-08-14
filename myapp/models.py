@@ -8,7 +8,7 @@ class Topic(models.Model):
     category = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.name + "  " + self.category
 
 
 class Course(models.Model):

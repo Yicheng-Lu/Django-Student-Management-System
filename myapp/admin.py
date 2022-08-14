@@ -13,7 +13,7 @@ class CourseInline(admin.TabularInline):
 
 class TopicAdmin(admin.ModelAdmin):
     inlines = [CourseInline]
-    fields = ['name']
+    fields = ['name', 'category']
 
 
 class CourseAdmin(admin.ModelAdmin):

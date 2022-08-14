@@ -3,32 +3,91 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}"/>
     <title>E-Learning WebApp - {% block title %}Welcome!{% endblock %}</title>
+    <script type="text/javascript"> (function () {
+        var css = document.createElement('link');
+        css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+        css.rel = 'stylesheet';
+        css.type = 'text/css';
+        document.getElementsByTagName('head')[0].appendChild(css);
+    })(); </script>
+    <link rel="stylesheet" href="{% static 'myapp/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/css/bootstrap.css' %}">
 </head>
 <body>
-    <div>
-        <h1>{% block myhdg %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a class="navbar-brand font-weight-bolder mr-3" href="{% url 'myapp:index' %}"><img
+            src="{% static 'myapp/img/logo.png' %}"></a>
+    <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault"
+            aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsDefault">
+        <ul class="navbar-nav mr-auto align-items-center">
+            <form class="bd-search hidden-sm-down">
+                <input type="text" class="form-control bg-graylight border-0 font-weight-bold" id="search-input"
+                       placeholder="Search..." autocomplete="off">
+                <div class="dropdown-menu bd-search-results" id="search-results">
+                </div>
+            </form>
+        </ul>
+        <ul class="navbar-nav ml-auto align-items-center">
             {% if request.user.is_authenticated %}
-                Hello {{ request.user.username }}!
+                <a class="nav-link active" href="{% url 'myapp:index' %}">Hello</a>
+
+                <li class="nav-item">
+                    <a class="nav-link" href=""><img class="rounded-circle mr-2"
+                                                     src="{% static 'myapp/img/av.png' %}"
+                                                     width="30">
+                        <span class="align-middle">{{ request.user.username }}</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'myapp:logout' %}"><span class="align-middle">Log out</span></a>
+                </li>
+
             {% else %}
-                Hello User!
+                <a class="nav-link active" href="{% url 'myapp:index' %}">Hello User!</a>
+
+                <li class="nav-item">
+                    <a class="nav-link" href=""><img class="rounded-circle mr-2"
+                                                     src="{% static 'myapp/img/av.png' %}"
+                                                     width="30"><span class="align-middle">Log in</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""><span class="align-middle">Registration</span></a>
+                </li>
             {% endif %}
-        {% endblock %}</h1>
+        </ul>
+    </div>
+</nav>
+{% comment %}<div>
+    <h1>{% block myhdg %}
         {% if request.user.is_authenticated %}
-            <p><a href="{% url 'myapp:logout' %}">Log Out</a></p>
+            Hello {{ request.user.username }}!
         {% else %}
-            <p>You are not logged in</p>
-            <a href="{% url 'myapp:login' %}">Log In</a>
+            Hello User!
         {% endif %}
+    {% endblock %}</h1>
+    {% if request.user.is_authenticated %}
+        <p><a href="{% url 'myapp:logout' %}">Log Out</a></p>
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'myapp:login' %}">Log In</a>
+    {% endif %}
+    {% block body_block %}*** {% endblock %}
+</div>{% endcomment %}
+<main role="main">
+    <div class="container mb-4">
         {% block body_block %}*** {% endblock %}
     </div>
-    <hr />
     <div>
-    <ul>
-        <li class="hbar1"><a href = "{% url 'myapp:about' %}">Find out about our E-Learning site</a><br></li>
-        <li class="hbar1"><a href = "{% url 'myapp:index' %}">Click here to return to main page</a><br/></li>
-        <li class="hbar1"><a href = "{% url 'myapp:courses' %}">Click here to check available courses</a><br/></li>
-    </ul>
+        <ul>
+            <li class="hbar1"><a href="{% url 'myapp:about' %}">Find out about our E-Learning site</a><br></li>
+            <li class="hbar1"><a href="{% url 'myapp:index' %}">Click here to return to main page</a><br/></li>
+            <li class="hbar1"><a href="{% url 'myapp:courses' %}">Click here to check available courses</a><br/></li>
+        </ul>
     </div>
+</main>
 </body>

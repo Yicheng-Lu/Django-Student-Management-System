@@ -1,19 +1,23 @@
 {% extends 'myapp/base.html' %}
 
 {% block body_block %}
-    <h3>Available Courses:</h3>
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <h3>Available Courses:</h3>
+        </div>
+    </div>
     <table>
         {% for course in cour_list %}
-        <tr>
-            <td>{{ course.id }}</td>
-            <td><a href = {% url "myapp:course_detail" course.id %}>{{ course.name }}</a></td>
-            <td>{{ course.price }}</td>
-        </tr>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item" style="width: 7%">{{ course.id }}</li>
+                <li class="list-group-item flex-fill"><a href= {% url "myapp:course_detail" course.id %}>{{ course.name }}</a></li>
+                <li class="list-group-item">{{ course.price }}</li>
+            </ul>
         {% endfor %}
     </table>
     <ul>
-        <li class="hbar1"><a href = "{% url 'myapp:index' %}">Click here to return to main page</a><br/></li>
-        <li class="hbar1"><a href = "{% url 'myapp:place_order' %}">Click here to place an order</a><br></li>
+        <li class="hbar1"><a href="{% url 'myapp:index' %}">Click here to return to main page</a><br/></li>
+        <li class="hbar1"><a href="{% url 'myapp:place_order' %}">Click here to place an order</a><br></li>
     </ul>
 {% endblock %}
 
