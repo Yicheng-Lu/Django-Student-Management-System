@@ -138,3 +138,13 @@ def testCookie(request):
             return HttpResponse("Please enable cookies")
     return render(request, 'myapp/index.html')
 
+
+@login_required(login_url='/myapp/login')
+def myorders(request):
+    usr = request.user
+    if Student.objects.get(username=usr.username):
+        order_list = Order.objects.filter(student=usr)
+        return render(request, 'myapp/myorders.html', {'order_list': order_list})
+    else:
+        msg = 'You are not a registered student.'
+        return render(request, 'myapp/order_response.html', {'msg': msg})

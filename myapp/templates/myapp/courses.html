@@ -3,11 +3,9 @@
 {% block body_block %}
     <h3>Available Courses:</h3>
     <table>
-        {% for course in cour_list %}
+        {% for order in order_list %}
         <tr>
-            <td>{{ course.id }}</td>
-            <td><a href = {% url "myapp:course_detail" course.id %}>{{ course.name }}</a></td>
-            <td>{{ course.price }}</td>
+            <td>{{ order.course }}</td>
         </tr>
         {% endfor %}
     </table>

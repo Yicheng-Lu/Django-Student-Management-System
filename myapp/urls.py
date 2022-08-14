@@ -14,4 +14,5 @@ urlpatterns = [
     path(r'myaccount', views.myaccount, name='myaccount'),
     path(r'testCookie', views.testCookie, name='testCookie'),
     path(r'register/', views.user_register, name='register'),
+    path(r'myorders', views.myorders, name='myorders'),
 ]
