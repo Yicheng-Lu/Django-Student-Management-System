@@ -1,6 +1,14 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+
+def validate_price(value):
+    if value < 50 or value > 500:
+        raise ValidationError(
+            ('Price musb be between 50 and 500.'),
+            params={'value': value},
+        )
 
 
 class Topic(models.Model):
@@ -14,7 +22,7 @@ class Topic(models.Model):
 class Course(models.Model):
     topic = models.ForeignKey(Topic, related_name='courses', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[validate_price])
     for_everyone = models.BooleanField(default=True)
     description = models.TextField(max_length=300, null=True, blank=True)
     interested = models.PositiveIntegerField(default=0)

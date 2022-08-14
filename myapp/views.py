@@ -1,13 +1,23 @@
 import json
 
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 from django.urls import reverse
 from django.utils import timezone
 
-from .forms import OrderForm, InterestForm, LoginForm
+from .forms import OrderForm, InterestForm, LoginForm, RegisterForm
 from .models import Topic, Course, Student, Order
 
 
@@ -16,7 +26,7 @@ def index(request):
     # if 'last_login' not in request.session:
     #     return HttpResponse('Your last login was more than one hour ago')
     # last_login = request.session['last_login']
-    return render(request, r'myapp/index.html', {'top_list': top_list})#, 'last_login': last_login})
+    return render(request, r'myapp/index.html', {'top_list': top_list})  # , 'last_login': last_login})
 
 
 def about(request):
@@ -55,7 +65,7 @@ def place_order(request):
             return render(request, 'myapp/order_response.html', {'msg': msg})
     else:
         form = OrderForm()
-    return render(request, 'myapp/place_order.html', {'order_form':form, 'msg':msg, 'courlist':courlist})
+    return render(request, 'myapp/place_order.html', {'order_form': form, 'msg': msg, 'courlist': courlist})
 
 
 def course_detail(request, course_no):
@@ -63,7 +73,7 @@ def course_detail(request, course_no):
     if request.method == "POST":
         form = InterestForm(request.POST)
         if form.is_valid():
-            course.interested = course.interested+1
+            course.interested = course.interested + 1
             course.save()
             return courses(request)
     else:
@@ -89,6 +99,17 @@ def user_login(request):
             return HttpResponse('Invalid login details.')
     else:
         return render(request, 'myapp/login.html', {'loginForm': LoginForm})
+
+def user_register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:login')
+    else:
+        form = RegisterForm
+    return render(request, 'myapp/register.html', {'form': form})
+
 
 
 @login_required
@@ -117,6 +138,36 @@ def myaccount(request):
         return render(request, 'myapp/order_response.html', {'msg': msg})
 
 
+def password_reset_request(request):
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data['email']
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "myapp/password_reset_email.txt"
+                    c = {
+                        "email": user.email,
+                        'domain': '127.0.0.1:8000',
+                        'site_name': 'Website',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+                    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(subject, email, 'admin@example.com', [user.email], fail_silently=False)
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                    return redirect("/password_reset/done/")
+    password_reset_form = PasswordResetForm()
+    return render(request=request, template_name="myapp/password_reset.html",
+                  context={"password_reset_form": password_reset_form})
+
+
 def testCookie(request):
     if request.method == "GET":
         if request.session.test_cookie_worked():
@@ -126,3 +177,15 @@ def testCookie(request):
             request.session.set_test_cookie()
             return HttpResponse("Please enable cookies")
     return render(request, 'myapp/index.html')
+
+
+@login_required(login_url='/myapp/login')
+def myorders(request):
+    usr = request.user
+    if Student.objects.get(username=usr.username):
+        order_list = Order.objects.filter(student=usr)
+        return render(request, 'myapp/myorders.html', {'order_list': order_list})
+    else:
+        msg = 'You are not a registered student.'
+        return render(request, 'myapp/order_response.html', {'msg': msg})
+

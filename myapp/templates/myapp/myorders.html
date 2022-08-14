@@ -1,0 +1,18 @@
+{% extends 'Myapp/base.html' %}
+<!--user.get_username可以从request中获取user name-->
+{% block body_block %}
+    {%  block content %}
+        <div>
+             {%  if order_list %}
+                <h2> Ordered Courses</h2>
+                <ol>
+                   {%  for crs in order_list %}
+                       <li>{{ crs }}</li>
+                   {% endfor %}
+                 </ol>
+            {%  else %}
+                <Strong> There is no Order </Strong>
+            {% endif %}
+        </div>
+    {%  endblock %}
+{% endblock %}
