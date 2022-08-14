@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
-    'bootstrap4',
     'crispy_forms'
 ]
 
@@ -127,9 +126,3 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-bootstrap4 = {
-    'include_jquery': True,
-}
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

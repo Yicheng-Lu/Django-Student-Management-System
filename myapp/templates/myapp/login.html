@@ -1,16 +1,23 @@
-
-{%  extends 'Myapp/base.html' %}
+{% extends 'Myapp/base.html' %}
 {% block body_block %}
-    <div>
+    <div class="container container-sm">
         <form action='' method='post'>
-            {% csrf_token %}
-            {{ loginForm }}
-            <input type="submit" value="login"/>
+            <div class="row justify-content-center">
+                {% csrf_token %}
+            </div>
+            <div class="row">
+                {{ loginForm }}
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <input class="btn btn-primary" type="submit" value="login"/>
+                </div>
+            </div>
         </form>
     </div>
     <div>
-        <p><a href="{% url 'myapp:password_reset' %}">Forget Password?</a></p>
+        <p><a href="{% url 'myapp:login' %}">Forget Password?</a></p>
     </div>
-{% endblock  %}
+{% endblock %}
 {% block myhdg %}Welcome, please login{% endblock %}
 {% block title %}login_Page{% endblock %}

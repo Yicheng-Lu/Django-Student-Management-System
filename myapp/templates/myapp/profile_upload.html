@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block body_block %}
+    <div class="row">
+        <div class="col-3">
+            <h4>Upload your profile:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="profile-selector" name="profile-selector">
+                        <label class="custom-file-label" for="selector">Select a picture</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 col-offset-8">
+            <button class="btn btn-primary" onclick="submitForm()" style="margin: 10px 0;" type="button">submit</button>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#profile-selector").fileinput({
+                showUpload: false,
+                allowedFileTypes: 'image',
+                allowedFileExtensions: ['jpg', 'png'],
+                maxFileSize: 2048,
+                maxFileCont: 1
+            });
+        });
+    </script>
+{% endblock %}

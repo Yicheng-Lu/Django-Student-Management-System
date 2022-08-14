@@ -3,12 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
+
 def validate_price(value):
     if value < 50 or value > 500:
-        raise ValidationError(
-            ('Price musb be between 50 and 500.'),
-            params={'value': value},
-        )
+        raise ValidationError('Price must be between 50 and 500.', params={'value': value},)
 
 
 class Topic(models.Model):
@@ -64,4 +62,3 @@ class Order(models.Model):
 
     def __str__(self):
         return self.course.name + " by " + self.student.username
-
