@@ -13,10 +13,10 @@ from .models import Topic, Course, Student, Order
 
 def index(request):
     top_list = Topic.objects.all().order_by('id')[:10]
-    if 'last_login' not in request.session:
-        return HttpResponse('Your last login was more than one hour ago')
-    last_login = request.session['last_login']
-    return render(request, r'myapp/index.html', {'top_list': top_list, 'last_login': last_login})
+    # if 'last_login' not in request.session:
+    #     return HttpResponse('Your last login was more than one hour ago')
+    # last_login = request.session['last_login']
+    return render(request, r'myapp/index.html', {'top_list': top_list})#, 'last_login': last_login})
 
 
 def about(request):
@@ -71,7 +71,6 @@ def course_detail(request, course_no):
     return render(request, 'myapp/course_detail.html', {'form': form, 'course': course})
 
 
-@login_required
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -98,7 +97,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('myapp:index'))
 
 
-@login_required
+@login_required(login_url='/myapp/login')
 def myaccount(request):
     usr = request.user
     if Student.objects.get(username=usr.username):

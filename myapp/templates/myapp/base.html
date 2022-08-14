@@ -8,7 +8,19 @@
 </head>
 <body>
     <div>
-        <h1>{% block myhdg %}Hello User {% endblock %}</h1>
+        <h1>{% block myhdg %}
+            {% if request.user.is_authenticated %}
+                Hello {{ request.user.username }}!
+            {% else %}
+                Hello User!
+            {% endif %}
+        {% endblock %}</h1>
+        {% if request.user.is_authenticated %}
+            <p><a href="{% url 'myapp:logout' %}">Log Out</a></p>
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'myapp:login' %}">Log In</a>
+        {% endif %}
         {% block body_block %}*** {% endblock %}
     </div>
     <hr />
