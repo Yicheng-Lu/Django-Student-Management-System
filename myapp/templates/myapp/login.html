@@ -1,13 +1,16 @@
 
 {%  extends 'Myapp/base.html' %}
 {% block body_block %}
-        <div>
-            <form action='' method='post'>
-                {% csrf_token %}
-                {{ loginForm }}
-                <input type="submit" value="login"/>
-            </form>
-        </div>
+    <div>
+        <form action='' method='post'>
+            {% csrf_token %}
+            {{ loginForm }}
+            <input type="submit" value="login"/>
+        </form>
+    </div>
+    <div>
+        <p><a href="{% url '' %}">Forget Password?</a></p>
+    </div>
 {% endblock  %}
 {% block myhdg %}Welcome, please login{% endblock %}
 {% block title %}login_Page{% endblock %}

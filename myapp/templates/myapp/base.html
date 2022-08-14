@@ -19,7 +19,8 @@
             <p><a href="{% url 'myapp:logout' %}">Log Out</a></p>
         {% else %}
             <p>You are not logged in</p>
-            <a href="{% url 'myapp:login' %}">Log In</a>
+            <p><a href="{% url 'myapp:login' %}">Log In</a></p>
+            <p><a href="{% url 'myapp:register' %}">Register</a></p>
         {% endif %}
         {% block body_block %}*** {% endblock %}
     </div>
