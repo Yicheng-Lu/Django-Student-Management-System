@@ -100,6 +100,7 @@ def user_login(request):
     else:
         return render(request, 'myapp/login.html', {'loginForm': LoginForm})
 
+
 def user_register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -109,7 +110,6 @@ def user_register(request):
     else:
         form = RegisterForm
     return render(request, 'myapp/register.html', {'form': form})
-
 
 
 @login_required
@@ -188,4 +188,8 @@ def myorders(request):
     else:
         msg = 'You are not a registered student.'
         return render(request, 'myapp/order_response.html', {'msg': msg})
+
+
+def profile_upload(request):
+    return render(request, 'myapp/profile_upload.html')
 

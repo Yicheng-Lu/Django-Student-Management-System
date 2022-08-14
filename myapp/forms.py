@@ -27,6 +27,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(required=True, label='username', max_length=100)
     password = forms.CharField(required=True, label='password', max_length=20)
 
+
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = Student

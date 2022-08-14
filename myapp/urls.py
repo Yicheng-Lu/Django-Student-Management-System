@@ -16,4 +16,5 @@ urlpatterns = [
     path(r'password_reset', views.password_reset_request, name="password_reset"),
     path(r'register', views.user_register, name='register'),
     path(r'myorders', views.myorders, name='myorders'),
+    path(r'profile_upload', views.profile_upload, name='profile_upload'),
 ]
