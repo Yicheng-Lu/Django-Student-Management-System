@@ -1,0 +1,339 @@
+[
+  {
+    "model": "myapp.topic",
+    "pk": 1,
+    "fields": {
+      "name": "Web Development",
+      "category": "Development"
+    }
+  },
+  {
+    "model": "myapp.topic",
+    "pk": 2,
+    "fields": {
+      "name": "Management",
+      "category": "Business"
+    }
+  },
+  {
+    "model": "myapp.topic",
+    "pk": 3,
+    "fields": {
+      "name": "Economics",
+      "category": "Finance & Accounting"
+    }
+  },
+  {
+    "model": "myapp.topic",
+    "pk": 4,
+    "fields": {
+      "name": "IT Certification",
+      "category": "IT & Software"
+    }
+  },
+  {
+    "model": "myapp.topic",
+    "pk": 5,
+    "fields": {
+      "name": "Sports",
+      "category": "Health & Fitness"
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 1,
+    "fields": {
+      "topic": 4,
+      "name": "CCNA",
+      "price": "199.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 2,
+    "fields": {
+      "topic": 4,
+      "name": "AWS",
+      "price": "119.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 3,
+    "fields": {
+      "topic": 4,
+      "name": "CompTIA Security",
+      "price": "139.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 4,
+    "fields": {
+      "topic": 4,
+      "name": "Oracle SQL",
+      "price": "159.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 5,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 5,
+    "fields": {
+      "topic": 3,
+      "name": "Microeconomics",
+      "price": "199.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 1,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 6,
+    "fields": {
+      "topic": 3,
+      "name": "Introduction to Economics",
+      "price": "174.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 7,
+    "fields": {
+      "topic": 3,
+      "name": "Global Economics",
+      "price": "149.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 8,
+    "fields": {
+      "topic": 1,
+      "name": "Web Development Bootcamp",
+      "price": "179.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 9,
+    "fields": {
+      "topic": 1,
+      "name": "Web Design",
+      "price": "159.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 10,
+    "fields": {
+      "topic": 1,
+      "name": "Web Development Mastercalss",
+      "price": "112.49",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 11,
+    "fields": {
+      "topic": 1,
+      "name": "Build Responsive Websites",
+      "price": "121.49",
+      "for_everyone": true,
+      "description": "",
+      "interested": 1,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 12,
+    "fields": {
+      "topic": 2,
+      "name": "Innovation for Business",
+      "price": "157.49",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 13,
+    "fields": {
+      "topic": 2,
+      "name": "Leadership Skills",
+      "price": "184.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.course",
+    "pk": 14,
+    "fields": {
+      "topic": 2,
+      "name": "Project Management",
+      "price": "149.99",
+      "for_everyone": true,
+      "description": "",
+      "interested": 0,
+      "stages": 3
+    }
+  },
+  {
+    "model": "myapp.student",
+    "pk": 2,
+    "fields": {
+      "school": "",
+      "address": "123 University Avenue",
+      "city": "WS",
+      "interested_in": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "myapp.student",
+    "pk": 3,
+    "fields": {
+      "school": "",
+      "address": "235 Sunset Avenue",
+      "city": "VC",
+      "interested_in": [
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "model": "myapp.student",
+    "pk": 4,
+    "fields": {
+      "school": "",
+      "address": "306 Prince Street",
+      "city": "CG",
+      "interested_in": [
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "myapp.student",
+    "pk": 5,
+    "fields": {
+      "school": "",
+      "address": "442 Sunset Avenue",
+      "city": "MR",
+      "interested_in": [
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "myapp.student",
+    "pk": 6,
+    "fields": {
+      "school": "",
+      "address": "987 King Street",
+      "city": "WS",
+      "interested_in": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 1,
+    "fields": {
+      "course": 11,
+      "student": 3,
+      "levels": 3,
+      "order_status": 1,
+      "order_date": "2022-01-01",
+      "order_price": "0.00"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 2,
+    "fields": {
+      "course": 13,
+      "student": 2,
+      "levels": 3,
+      "order_status": 1,
+      "order_date": "2022-01-01",
+      "order_price": "166.49"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 3,
+    "fields": {
+      "course": 14,
+      "student": 6,
+      "levels": 3,
+      "order_status": 1,
+      "order_date": "2022-01-01",
+      "order_price": "0.00"
+    }
+  },
+  {
+    "model": "myapp.order",
+    "pk": 4,
+    "fields": {
+      "course": 13,
+      "student": 2,
+      "levels": 3,
+      "order_status": 1,
+      "order_date": "2022-01-01",
+      "order_price": "166.49"
+    }
+  }
+]
