@@ -51,6 +51,7 @@ def courses(request):
     return render(request, 'myapp/courses.html', {'cour_list': cour_list})
 
 
+@login_required(login_url='/myapp/login')
 def place_order(request):
     msg = ''
     courlist = Course.objects.all()
@@ -58,14 +59,17 @@ def place_order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
-            if order.levels <= order.course.stages:
-                price = order.course.price
-                if price >= 150:
-                    order.order_price = order.course.discount()
-                order.save()
-                msg = 'Your course has been ordered successfully.'
+            if order.student.username == request.user.username:
+                if order.levels <= order.course.stages:
+                    price = order.course.price
+                    if price >= 150:
+                        order.order_price = order.course.discount()
+                    order.save()
+                    msg = 'Your course has been ordered successfully.'
+                else:
+                    msg = 'You exceeded the number of levels for this course.'
             else:
-                msg = 'You exceeded the number of levels for this course.'
+                msg = 'You cannot order for others.'
             return render(request, 'myapp/order_response.html', {'msg': msg})
     else:
         form = OrderForm()
