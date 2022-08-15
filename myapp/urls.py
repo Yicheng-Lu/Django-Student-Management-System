@@ -19,4 +19,5 @@ urlpatterns = [
     path(r'profile_upload_page', views.profile_upload_page, name='profile_upload_page'),
     path(r'profile_upload_handler', views.profile_upload_handler, name='profile_upload_handler'),
     path(r'request_profile/<int:student_id>', views.profile_request_controller, name='request_profile'),
+
 ]

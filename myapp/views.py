@@ -144,11 +144,14 @@ def myaccount(request):
 
 def password_reset_request(request):
     if request.method == "POST":
+        print('1')
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
+            print('2')
             data = password_reset_form.cleaned_data['email']
             associated_users = User.objects.filter(Q(email=data))
             if associated_users.exists():
+                print('3')
                 for user in associated_users:
                     subject = "Password Reset Requested"
                     email_template_name = "myapp/password_reset_email.txt"
@@ -156,12 +159,13 @@ def password_reset_request(request):
                         "email": user.email,
                         'domain': '127.0.0.1:8000',
                         'site_name': 'Website',
-                        "uid": urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                         "user": user,
                         'token': default_token_generator.make_token(user),
                         'protocol': 'http',
                     }
                     email = render_to_string(email_template_name, c)
+                    print('4')
                     try:
                         send_mail(subject, email, 'admin@example.com', [user.email], fail_silently=False)
                     except BadHeaderError:
