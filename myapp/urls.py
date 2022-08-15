@@ -16,5 +16,7 @@ urlpatterns = [
     path(r'password_reset', views.password_reset_request, name="password_reset"),
     path(r'register', views.user_register, name='register'),
     path(r'myorders', views.myorders, name='myorders'),
-    path(r'profile_upload', views.profile_upload, name='profile_upload'),
+    path(r'profile_upload_page', views.profile_upload_page, name='profile_upload_page'),
+    path(r'profile_upload_handler', views.profile_upload_handler, name='profile_upload_handler'),
+    path(r'request_profile/<int:student_id>', views.profile_request_controller, name='request_profile'),
 ]

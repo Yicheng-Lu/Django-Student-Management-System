@@ -3,8 +3,9 @@ import datetime
 
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import RadioSelect, SelectDateWidget
+from django.forms import ModelForm
 
-from myapp.models import Order, Student
+from myapp.models import *
 
 
 class InterestForm(forms.Form):
@@ -32,3 +33,9 @@ class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = Student
         fields = ['username', 'first_name', 'last_name', 'school', 'address', 'city', 'interested_in']
+
+
+class ProfileUploadHandler(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_name', 'profile_storage']

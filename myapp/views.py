@@ -1,5 +1,8 @@
 import json
+import re
+import time
 
+from PIL import Image
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login, logout
@@ -16,9 +19,10 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.urls import reverse
 from django.utils import timezone
+from django.conf import settings
 
-from .forms import OrderForm, InterestForm, LoginForm, RegisterForm
-from .models import Topic, Course, Student, Order
+from .forms import *
+from .models import *
 
 
 def index(request):
@@ -190,6 +194,46 @@ def myorders(request):
         return render(request, 'myapp/order_response.html', {'msg': msg})
 
 
-def profile_upload(request):
+def profile_upload_page(request):
     return render(request, 'myapp/profile_upload.html')
 
+
+def profile_upload_handler(request):
+    if request.method == 'POST':
+        # form = ProfileUploadHandler(request.POST, request.FILES)
+        image_name = request.FILES['profile-selector'].name
+        i = re.search(".png|.jpg", image_name)
+        if i is not None:
+            p = i.start()
+            image_name = image_name[:p] + time.strftime("%a%b%d%H%M%S%Y", time.localtime()) + image_name[p:]
+        else:
+            return HttpResponse('Error occurred')
+        profile_file = request.FILES['profile-selector']
+        profile_file.name = image_name
+        id = request.POST['student-id']
+        student_object = Student.objects.raw("select * from myapp_student where user_ptr_id = " + id)[0]
+        if student_object:
+            savor = Profile(profile_name=image_name, profile_storage=profile_file,
+                            update_date=timezone.localtime(timezone.now()), student=student_object)
+            savor.save()
+            return render(request, 'myapp/base.html')
+        else:
+            return HttpResponse('Not a validate student!')
+
+
+def profile_request_controller(request, student_id):
+    id_list = [student_id]
+    student = Student.objects.raw("select * from myapp_student where user_ptr_id = %s", id_list)[0]
+    target_object = Profile.objects.filter(student_id=student)
+    if len(target_object) > 0:
+        storage_path = settings.MEDIA_ROOT + target_object[0].profile_storage.__str__()
+    else:
+        return HttpResponse("Error occurred")
+    try:
+        with open(storage_path, "rb") as f:
+            return HttpResponse(f.read(), content_type="image/jpeg")
+    except IOError:
+        red = Image.new('RGBA', (1, 1), (255, 0, 0, 0))
+        response = HttpResponse(content_type="image/jpeg")
+        red.save(response, "JPEG")
+        return response

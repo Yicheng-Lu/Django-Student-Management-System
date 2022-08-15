@@ -62,3 +62,11 @@ class Order(models.Model):
 
     def __str__(self):
         return self.course.name + " by " + self.student.username
+
+
+class Profile(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    profile_name = models.CharField(max_length=100)
+    update_date = models.DateField()
+    profile_storage = models.FileField(upload_to="profiles/")
+
