@@ -220,7 +220,7 @@ def profile_upload_handler(request):
             savor = Profile(profile_name=image_name, profile_storage=profile_file,
                             update_date=timezone.localtime(timezone.now()), student=student_object)
             savor.save()
-            return render(request, 'myapp/base.html')
+            return HttpResponseRedirect(reverse('myapp:index'))
         else:
             return HttpResponse('Not a validate student!')
 
