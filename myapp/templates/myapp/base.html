@@ -89,6 +89,9 @@
     <hr />
     <div>
         <ul>
+            {% if request.user.is_authenticated %}
+                <li class="hbar1"><a href="{% url 'myapp:myorders' %}">Check All Your Orders</a><br></li>
+            {% endif %}
             <li class="hbar1"><a href="{% url 'myapp:about' %}">Find out about our E-Learning site</a><br></li>
             <li class="hbar1"><a href="{% url 'myapp:index' %}">Click here to return to main page</a><br/></li>
             <li class="hbar1"><a href="{% url 'myapp:courses' %}">Click here to check available courses</a><br/></li>

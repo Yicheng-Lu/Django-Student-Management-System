@@ -196,7 +196,11 @@ def myorders(request):
     usr = request.user
     if Student.objects.get(username=usr.username):
         order_list = Order.objects.filter(student=usr)
-        return render(request, 'myapp/myorders.html', {'order_list': order_list})
+        if len(order_list) != 0:
+            return render(request, 'myapp/myorders.html', {'order_list': order_list})
+        else:
+            msg = "You haven't order any courses yet."
+            return render(request, 'myapp/order_response.html', {'msg': msg})
     else:
         msg = 'You are not a registered student.'
         return render(request, 'myapp/order_response.html', {'msg': msg})
