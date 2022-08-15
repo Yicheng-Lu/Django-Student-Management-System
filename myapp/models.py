@@ -42,6 +42,14 @@ class Student(User):
     address = models.CharField(max_length=50, blank=True, )
     city = models.CharField(max_length=2, choices=CITY_CHOICES, default='WS')
     interested_in = models.ManyToManyField(Topic)
+    level = models.IntegerField(default=1)
+
+    def course_list(self):
+        order_list = Order.objects.filter(student=self)
+        course_list = []
+        for order in order_list:
+            course_list.append(order.course)
+        return course_list
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)

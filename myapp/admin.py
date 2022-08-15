@@ -28,7 +28,11 @@ class CourseAdmin(admin.ModelAdmin):
             course.save()
 
 
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'level', 'course_list']
+
+
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Course, CourseAdmin)
-admin.site.register(Student)
+admin.site.register(Student, StudentAdmin)
 admin.site.register(Order)
